@@ -1,7 +1,3 @@
 # TreasureHunter-JavaYong
-Project for CBNU Opensource subject
+AR treasure finding game operating under android device
 
-
-Topic : Treasure finding game
-Tema : AR treasure finding game operating under android device
-Language : JAVA
