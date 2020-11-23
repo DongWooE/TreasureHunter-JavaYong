@@ -1,4 +1,4 @@
-package com.example.javayongtest;
+package com.example.javayongtest.MainInterface;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -9,6 +9,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+
+import com.example.javayongtest.R;
 
 public class MainPage extends AppCompatActivity {
 

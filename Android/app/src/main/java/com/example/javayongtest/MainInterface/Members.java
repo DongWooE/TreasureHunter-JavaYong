@@ -1,4 +1,4 @@
-package com.example.javayongtest;
+package com.example.javayongtest.MainInterface;
 
 public class Members {
 
@@ -7,6 +7,11 @@ public class Members {
     private boolean readyCheck;
 
     public Members(){}
+
+    public Members(String userNickName, boolean readyCheck){
+        this.userNickName = userNickName;
+        this.readyCheck = readyCheck;
+    }
 
     public String getUserNickName() {
         return userNickName;

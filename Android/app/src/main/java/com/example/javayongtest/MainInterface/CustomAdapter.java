@@ -1,4 +1,4 @@
-package com.example.javayongtest;
+package com.example.javayongtest.MainInterface;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -8,6 +8,8 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.javayongtest.R;
 
 import java.util.ArrayList;
 
@@ -20,7 +22,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomView
     private Context context;
 
 
-    public CustomAdapter(ArrayList<Members> arrayList, Context context) {
+    public CustomAdapter(ArrayList<Members> arrayList) {
         this.arrayList = arrayList;
         this.context = context;
     }

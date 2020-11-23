@@ -1,10 +1,12 @@
-package com.example.javayongtest;
+package com.example.javayongtest.MainInterface;
 
 import android.os.Bundle;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.preference.PreferenceFragmentCompat;
+
+import com.example.javayongtest.R;
 
 public class SettingsActivity extends AppCompatActivity {
 
