@@ -9,9 +9,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".MainInterface.ExampleForFirebase"></activity>
+        <activity android:name=".MainInterface.SelectMode" />
         <activity
             android:name=".MainInterface.SettingsActivity"
-            android:label="@string/title_activity_settings"></activity>
+            android:label="@string/title_activity_settings" />
         <activity android:name=".MainInterface.EnterRoom" />
         <activity android:name=".MainInterface.CreateRoom" />
         <activity android:name=".MainInterface.MainPage" />
