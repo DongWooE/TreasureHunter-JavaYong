@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".CreateRoom">
+    tools:context=".MainInterface.CreateRoom">
 
     <TextView
         android:id="@+id/textView2"
@@ -25,6 +25,24 @@
         app:layout_constraintBottom_toTopOf="@+id/gameStart"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+
+    <FrameLayout
+        android:id="@+id/memberList"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/gameStart"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textCode" >
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/memberList_recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+
+    </FrameLayout>
 
     <Button
         android:id="@+id/gameStart"
