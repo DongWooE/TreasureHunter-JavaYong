@@ -20,6 +20,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
@@ -77,6 +78,25 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private FloatingActionButton fab;
     private int selectedId = -1;
 
+    //여기는 타이머 변수
+    private int count=60;    //카운트다운 시작숫자
+    private TextView TextViewMain;
+    private Handler handler = new Handler();
+
+    private Runnable runnable = new Runnable() {
+        @Override
+        public void run() {
+            TextViewMain.setText(count + ""); //int형으로 넣으면 오류나고 뒤에 ""붙여서 스트링으로
+            count -= 1;
+            if (count <= 0) {
+                handler.removeCallbacks(runnable, 1000);
+            } else {
+                handler.postDelayed(runnable, 1000);
+            }
+        }
+    };
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -95,7 +115,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         //on tapping of the scene, we want to interact with the world
         mFragment.getArSceneView().getScene().setOnTouchListener((hitTestResult, motionEvent) -> mGestureDetector.onTouchEvent(motionEvent));
-
+        //여기서부터 타이머
+        TextViewMain = findViewById(R.id.TextViewMain);
+        TextViewMain.setText("");   //1초 간격으로 출력
+        handler.post(runnable);
+        //여기까지 타이머
         mGestureDetector =
                 new GestureDetector(
                         this,
