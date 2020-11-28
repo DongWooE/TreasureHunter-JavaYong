@@ -80,10 +80,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private int selectedId = -1;
 
 
-
     //여기는 setHidingtime 변수
     private Integer count = GameRuleActivity.setHidingtime;    //카운트다운 시작숫자
-    private TextView TextViewMain;
+    private TextView TextViewMain;  //
     private Handler Hidinghandler = new Handler();
 
     private Runnable runnable = new Runnable() {
@@ -93,7 +92,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             count -= 1;
             if (count <= 0) {
                 isFindingTreasure=true;
-                Intent intent=new Intent(MainActivity.this,ConvertToFinding.class);
+                Intent intent= new Intent(MainActivity.this,ConvertToFinding.class);
                 startActivity(intent);
                 Hidinghandler.removeCallbacks(runnable);
                 TextViewMain.setText(""); //int형으로 넣으면 오류나고 뒤에 ""붙여서 스트링으로
@@ -132,7 +131,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private int score = 0; //점수
     private boolean isFindingTreasure=false; //보물을 찾고 있는가?
     private TextView UserInfo; //user정보
-    private String ISFINDINGTREASURE; //보물을 숨기고 있으면 "보물을 숨기는 중"
+    private String ISFINDINGTREASURE = "보물을 찾는 중"; //보물을 숨기고 있으면 "보물을 숨기는 중"
     private Handler UIhandler = new Handler();
 
     private Runnable UIrunnable = new Runnable() {
@@ -177,7 +176,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if(isFindingTreasure==false) {
             //여기서부터 타이머
             TextViewMain = findViewById(R.id.TextViewMain);
-            TextViewMain.setText("");   //1초 간격으로 출력
+            TextViewMain.setText("");   //1초 간격으로 출력, setText 초기값으로 초기화
             Hidinghandler.post(runnable);
             //여기까지 타이머
         }
