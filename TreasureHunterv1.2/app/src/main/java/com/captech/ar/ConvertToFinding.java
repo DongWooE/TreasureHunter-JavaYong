@@ -9,9 +9,8 @@ import android.widget.Button;
 
 public class ConvertToFinding extends AppCompatActivity {
 
-    public static Integer num1;
+
     Button btn_convert;
-//public static int isbutton=0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,6 +22,7 @@ public class ConvertToFinding extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
+                setResult(RESULT_OK);
               finish();
             }
         });

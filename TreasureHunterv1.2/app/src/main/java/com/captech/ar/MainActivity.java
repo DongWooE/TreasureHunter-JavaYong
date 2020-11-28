@@ -79,7 +79,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private Button saveTextButton;
     private FloatingActionButton fab;
     private int selectedId = -1;
-    private int isbutton1;
+    static final int REQUEST_CODE = 100;
+    boolean isbutton = false;
 
     //여기는 setHidingtime 변수
     private Integer count = GameRuleActivity.setHidingtime;    //카운트다운 시작숫자
@@ -94,13 +95,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             if (count <= 0) {
                 isFindingTreasure=true;
                 Intent intent= new Intent(MainActivity.this,ConvertToFinding.class);
-                startActivity(intent);
+                startActivityForResult(intent, REQUEST_CODE);
 
                 Hidinghandler.removeCallbacks(runnable);
                 TextViewMain.setText(""); //int형으로 넣으면 오류나고 뒤에 ""붙여서 스트링으로
-
-                    FindView.setText("");   //1초 간격으로 출력
-                    Findinghandler.post(runnable_find);
 
             } else {
                 Hidinghandler.postDelayed(runnable, 1000);
@@ -108,16 +106,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     };
 
-  /*  @Override
+   @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == REQUEST_CODE)
         {
             if(resultCode == RESULT_OK){
-                REQUEST_CODE = resultCode;
+                FindView.setText("");   //1초 간격으로 출력
+                Findinghandler.post(runnable_find);
             }
         }
-    }*/
+    }
 
     //여기는 setfindingtime 변수
     private Integer count_find = GameRuleActivity.setFindingtime;    //카운트다운 시작숫자
@@ -131,8 +130,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             count_find -= 1;
             if (count_find <= 0) {
                 isFindingTreasure=false;
-                //Intent intent=new Intent(MainActivity.this,ScoreActivity.class);
-               // startActivity(intent);
+                Intent intent=new Intent(MainActivity.this,ScoreActivity.class);
+                startActivity(intent);
                 Findinghandler.removeCallbacks(runnable_find);
                 FindView.setText(""); //int형으로 넣으면 오류나고 뒤에 ""붙여서 스트링으로
             } else {
