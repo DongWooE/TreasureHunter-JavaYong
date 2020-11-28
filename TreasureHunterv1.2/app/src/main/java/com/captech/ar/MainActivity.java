@@ -79,8 +79,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private FloatingActionButton fab;
     private int selectedId = -1;
 
+
+
     //여기는 타이머 변수
-    private int count=30;    //카운트다운 시작숫자
+    private Integer count = GameRuleActivity.setFindingtime;    //카운트다운 시작숫자
     private TextView TextViewMain;
     private Handler handler = new Handler();
 
@@ -102,7 +104,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     };
 
     //user정보에 대한 변수
-    private String UserNickname; //user이름
     private int setHidingtime; //보물을 숨기는 시간
     private int setFindingtime; //보물을 찾는 시간
     private int setNumberOfTreasure = 0; //보물의 개수
@@ -115,11 +116,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private Runnable UIrunnable = new Runnable() {
         @Override
         public void run() {
-            UserInfo.setText("닉네임 : " + UserNickname+"\n"+
+            UserInfo.setText("닉네임 : " + GameRuleActivity.userNickName+"\n"+
                     "보물을 숨기는 시간 : "+setHidingtime+"\n"+
                     "보물을 찾는 시간 : "+setFindingtime+"\n"+
                     "보물의 갯수 : "+setNumberOfTreasure+"\n"+
-                    UserNickname+"의 점수 : "+score+"\n"+
+                    GameRuleActivity.userNickName+"의 점수 : "+score+"\n"+
                     ISFINDINGTREASURE+"\n");
             if(isFindingTreasure){
                 ISFINDINGTREASURE="보물을 찾는 중";
