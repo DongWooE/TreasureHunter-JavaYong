@@ -44,3 +44,8 @@ sceneform.asset('sampledata/post_it.obj',
         'default',
         'sampledata/post_it.sfa',
         'src/main/assets/post_it')
+
+sceneform.asset('sampledata/model.obj',
+        'default',
+        'sampledata/model.sfa',
+        'src/main/assets/model')
