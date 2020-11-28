@@ -84,8 +84,8 @@ public class GameRuleActivity extends AppCompatActivity {
 
                 boolean isNext = false;
                 try {
-                    setFindingtime = Integer.parseInt(stringHide);
-                    setHidingtime = Integer.parseInt(stringFind);
+                    setFindingtime = Integer.parseInt(stringFind);
+                    setHidingtime = Integer.parseInt(stringHide);
 
                     isNext = true;
                 } catch (NumberFormatException e) {
