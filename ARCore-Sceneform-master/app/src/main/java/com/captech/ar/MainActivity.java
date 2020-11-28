@@ -170,7 +170,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if (selectedId == -1 || motionEvent == null || frame == null ||
                 frame.getCamera().getTrackingState() != TrackingState.TRACKING)
             return;
-        int abc;
+
 
         for (HitResult hit : frame.hitTest(motionEvent)) {
             Trackable trackable = hit.getTrackable();
@@ -255,8 +255,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         postitNode.setParent(anchorNode);
 
         //rotate the post it to stick to the flat surface.
-        if(!isTagger)
-            postitNode.setLocalRotation(new Quaternion(.65f, 0f, 0f, -.5f));
+        //postitNode.setLocalRotation(new Quaternion(.65f, 0f, 0f, -.5f));
         //위에거 주석처리 하니까 갑자기 포스트잇이 회전이 된다.
 
         //add text view node
@@ -302,6 +301,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         });
 
 
+
+        
         fragment.getArSceneView().getScene().addChild(anchorNode);
         postitNode.select();
     }
