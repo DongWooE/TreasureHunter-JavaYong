@@ -314,7 +314,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
      */
     private void buildRenderable(ArFragment fragment, Anchor anchor) {
         ModelRenderable.builder()
-                .setSource(fragment.getContext(), Uri.parse("post_it.sfb"))
+                .setSource(fragment.getContext(), Uri.parse("model.sfb"))
                 .build()
                 .thenAccept(renderable -> addNodeToScene(fragment, anchor, renderable))
                 .exceptionally((throwable -> {
@@ -340,7 +340,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         TransformableNode postitNode = new TransformableNode(fragment.getTransformationSystem());
         postitNode.setRenderable(renderable);
         postitNode.setParent(anchorNode);
-
+        anchorNode.setLocalScale(new Vector3(0.1f,0.1f,0.1f));  //보물상자 스케일 조절
         //rotate the post it to stick to the flat surface.
         //postitNode.setLocalRotation(new Quaternion(.65f, 0f, 0f, -.5f));
 
