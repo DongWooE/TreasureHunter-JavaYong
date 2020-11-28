@@ -18,6 +18,7 @@ package com.captech.ar;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -89,13 +90,48 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             TextViewMain.setText(count + ""); //int형으로 넣으면 오류나고 뒤에 ""붙여서 스트링으로
             count -= 1;
             if (count <= 0) {
-                handler.removeCallbacks(runnable, 1000);
+                isFindingTreasure=true;
+                Intent intent=new Intent(MainActivity.this,ConvertToFinding.class);
+                startActivity(intent);
+                handler.removeCallbacks(runnable);
+                TextViewMain.setText(""); //int형으로 넣으면 오류나고 뒤에 ""붙여서 스트링으로
             } else {
                 handler.postDelayed(runnable, 1000);
             }
         }
     };
 
+    //user정보에 대한 변수
+    private String UserNickname; //user이름
+    private int setHidingtime; //보물을 숨기는 시간
+    private int setFindingtime; //보물을 찾는 시간
+    private int setNumberOfTreasure; //보물의 개수
+    private int score; //점수
+    private boolean isFindingTreasure=false; //보물을 찾고 있는가?
+    private TextView UserInfo; //user정보
+    private String ISFINDINGTREASURE; //보물을 숨기고 있으면 "보물을 숨기는 중"
+    private Handler UIhandler = new Handler();
+
+    private Runnable UIrunnable = new Runnable() {
+        @Override
+        public void run() {
+            UserInfo.setText("닉네임 : " + UserNickname+"\n"+
+                    "보물을 숨기는 시간 : "+setHidingtime+"\n"+
+                    "보물을 찾는 시간 : "+setFindingtime+"\n"+
+                    "보물의 갯수 : "+setNumberOfTreasure+"\n"+
+                    UserNickname+"의 점수 : "+score+"\n"+
+                    ISFINDINGTREASURE+"\n");
+            if(isFindingTreasure){
+                ISFINDINGTREASURE="보물을 찾는 중";
+                //UIhandler.postDelayed(UIrunnable,0);
+            }
+            else{
+                ISFINDINGTREASURE="보물을 숨기는 중";
+                //UIhandler.removeCallbacks(UIrunnable);
+            }
+            UIhandler.postDelayed(UIrunnable,0);
+        }
+    };
 
 
     @Override
@@ -121,7 +157,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         handler.post(runnable);
         //여기까지 타이머
 
-
+        //userinfo start
+        UserInfo=findViewById(R.id.UserInfo);
+        UserInfo.setText("");
+        handler.post(UIrunnable);
+        //userinfo end
 
         mGestureDetector =
                 new GestureDetector(
