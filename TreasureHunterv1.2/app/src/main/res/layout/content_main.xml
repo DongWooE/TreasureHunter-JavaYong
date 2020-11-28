@@ -61,7 +61,7 @@
             android:layout_height="@dimen/icon_height"
             android:layout_gravity="center"
             android:padding="5dp"
-            android:src="@drawable/post_it_icon" />
+            android:src="@drawable/treasure_it_icon" />
 
 
     </FrameLayout>
