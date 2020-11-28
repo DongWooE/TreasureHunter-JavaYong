@@ -96,7 +96,32 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     };
 
+    //user정보에 대한 변수
+    private String UserNickname; //user이름
+    private int setHidingtime; //보물을 숨기는 시간
+    private int setFindingtime; //보물을 찾는 시간
+    private int setNumberOfTreasure; //보물의 개수
+    private int score; //점수
+    private boolean isFindingTreasure; //보물을 찾고 있는가?
+    private TextView UserInfo; //user정보
+    private String ISFINDINGTREASURE; //보물을 숨기고 있으면 "보물을 숨기는 중"
+    private Handler UIhandler = new Handler();
 
+    private Runnable UIrunnable = new Runnable() {
+        @Override
+        public void run() {
+            if(!isFindingTreasure)
+                ISFINDINGTREASURE="보물을 숨기는 중";
+            else
+                ISFINDINGTREASURE="보물을 찾는 중";
+            UserInfo.setText("닉네임 : " + UserNickname+"\n"+
+                    "보물을 숨기는 시간 : "+setHidingtime+"\n"+
+                    "보물을 찾는 시간 : "+setFindingtime+"\n"+
+                    "보물의 갯수 : "+setNumberOfTreasure+"\n"+
+                    UserNickname+"의 점수 : "+score+"\n"+
+                    ISFINDINGTREASURE+"\n");
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -115,11 +140,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         //on tapping of the scene, we want to interact with the world
         mFragment.getArSceneView().getScene().setOnTouchListener((hitTestResult, motionEvent) -> mGestureDetector.onTouchEvent(motionEvent));
+
         //여기서부터 타이머
         TextViewMain = findViewById(R.id.TextViewMain);
         TextViewMain.setText("");   //1초 간격으로 출력
         handler.post(runnable);
         //여기까지 타이머
+
+        //userinfo start
+        UserInfo=findViewById(R.id.UserInfo);
+        UserInfo.setText("");
+        handler.post(UIrunnable);
+        //userinfo end
+
         mGestureDetector =
                 new GestureDetector(
                         this,

@@ -39,17 +39,32 @@
     <remote-repository>
       <option name="id" value="C:\AndroidSDK\extras\m2repository" />
       <option name="name" value="C:\AndroidSDK\extras\m2repository" />
-      <option name="url" value="file:/$PROJECT_DIR$/../../../../AndroidSDK/extras/m2repository" />
+      <option name="url" value="file:/C:/../AndroidSDK/extras/m2repository" />
     </remote-repository>
     <remote-repository>
       <option name="id" value="C:\AndroidSDK\extras\android\m2repository" />
       <option name="name" value="C:\AndroidSDK\extras\android\m2repository" />
-      <option name="url" value="file:/$PROJECT_DIR$/../../../../AndroidSDK/extras/android/m2repository" />
+      <option name="url" value="file:/C:/../AndroidSDK/extras/android/m2repository" />
     </remote-repository>
     <remote-repository>
       <option name="id" value="C:\AndroidSDK\extras\google\m2repository" />
       <option name="name" value="C:\AndroidSDK\extras\google\m2repository" />
-      <option name="url" value="file:/$PROJECT_DIR$/../../../../AndroidSDK/extras/google/m2repository" />
+      <option name="url" value="file:/C:/../AndroidSDK/extras/google/m2repository" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="C:\Users\Public\extras\android\m2repository" />
+      <option name="name" value="C:\Users\Public\extras\android\m2repository" />
+      <option name="url" value="file:/$PROJECT_DIR$/../extras/android/m2repository" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="C:\Users\Public\extras\m2repository" />
+      <option name="name" value="C:\Users\Public\extras\m2repository" />
+      <option name="url" value="file:/$PROJECT_DIR$/../extras/m2repository" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="C:\Users\Public\extras\google\m2repository" />
+      <option name="name" value="C:\Users\Public\extras\google\m2repository" />
+      <option name="url" value="file:/$PROJECT_DIR$/../extras/google/m2repository" />
     </remote-repository>
   </component>
 </project>
