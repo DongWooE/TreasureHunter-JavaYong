@@ -70,6 +70,7 @@ import com.google.ar.sceneform.ux.TransformableNode;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
+
     private ArFragment mFragment;
     private GestureDetector mGestureDetector;
     private ImageView postImageView;
@@ -78,7 +79,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private Button saveTextButton;
     private FloatingActionButton fab;
     private int selectedId = -1;
-
+    private int isbutton1;
 
 
     //여기는 setHidingtime 변수
@@ -95,13 +96,30 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 isFindingTreasure=true;
                 Intent intent=new Intent(MainActivity.this,ConvertToFinding.class);
                 startActivity(intent);
+                isbutton1 = intent.getIntExtra("isbutton");
                 Hidinghandler.removeCallbacks(runnable);
                 TextViewMain.setText(""); //int형으로 넣으면 오류나고 뒤에 ""붙여서 스트링으로
+               //if(){
+                    FindView.setText("");   //1초 간격으로 출력
+                    Findinghandler.post(runnable_find);
+                //}
+
             } else {
                 Hidinghandler.postDelayed(runnable, 1000);
             }
         }
     };
+
+  /*  @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == REQUEST_CODE)
+        {
+            if(resultCode == RESULT_OK){
+                REQUEST_CODE = resultCode;
+            }
+        }
+    }*/
 
     //여기는 setfindingtime 변수
     private Integer count_find = GameRuleActivity.setFindingtime;    //카운트다운 시작숫자
@@ -111,11 +129,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private Runnable runnable_find = new Runnable() {
         @Override
         public void run() {
-            FindView.setText(count_find + ""); //int형으로 넣으면 오류나고 뒤에 ""붙여서 스트링으로
+            FindView.setText(count_find + ""); //int형으로 넣으면 오류나고 뒤에 ""붙여서 스트링으로  만들기
             count_find -= 1;
             if (count_find <= 0) {
                 isFindingTreasure=false;
-                Intent intent=new Intent(MainActivity.this,ConvertToFinding.class);
+                Intent intent=new Intent(MainActivity.this,ScoreActivity.class);
                 startActivity(intent);
                 Findinghandler.removeCallbacks(runnable_find);
                 FindView.setText(""); //int형으로 넣으면 오류나고 뒤에 ""붙여서 스트링으로
@@ -129,7 +147,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private int setHidingtime; //보물을 숨기는 시간
     private int setFindingtime; //보물을 찾는 시간
     private int setNumberOfTreasure = 0; //보물의 개수
-    private int score = 0; //점수
+    public static int score = 0; //점수
     private boolean isFindingTreasure=false; //보물을 찾고 있는가?
     private TextView UserInfo; //user정보
     private String ISFINDINGTREASURE; //보물을 숨기고 있으면 "보물을 숨기는 중"
@@ -174,19 +192,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         //on tapping of the scene, we want to interact with the world
         mFragment.getArSceneView().getScene().setOnTouchListener((hitTestResult, motionEvent) -> mGestureDetector.onTouchEvent(motionEvent));
-        if(isFindingTreasure==false) {
+
+        FindView = findViewById(R.id.FindView);
+
             //여기서부터 타이머
             TextViewMain = findViewById(R.id.TextViewMain);
             TextViewMain.setText("");   //1초 간격으로 출력
             Hidinghandler.post(runnable);
             //여기까지 타이머
-        }
-
-        if(isFindingTreasure==true){
-            FindView = findViewById(R.id.FindView);
-            FindView.setText("");   //1초 간격으로 출력
-            Findinghandler.post(runnable_find);
-        }
 
         //userinfo start
         UserInfo=findViewById(R.id.UserInfo);
