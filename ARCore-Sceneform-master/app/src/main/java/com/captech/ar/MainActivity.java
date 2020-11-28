@@ -78,6 +78,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private int selectedId = -1;
     public Anchor temp;
     public TransformableNode temp2;
+    public boolean isTagger= true;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -106,14 +108,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             @Override
                             public boolean onSingleTapUp(MotionEvent e)
                             {
-                                tapAddObject(e);
+                                if(isTagger)
+                                {
+                                    tapAddObject(e);
+                                }
+
                                 return true;
                             }
 
                             @Override
                             public void onLongPress(MotionEvent e) {
                                 //tapDeleteObject(e);
-
                                 return;
                             }
 
@@ -250,7 +255,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         postitNode.setParent(anchorNode);
 
         //rotate the post it to stick to the flat surface.
-        //postitNode.setLocalRotation(new Quaternion(.65f, 0f, 0f, -.5f));
+        if(!isTagger)
+            postitNode.setLocalRotation(new Quaternion(.65f, 0f, 0f, -.5f));
         //위에거 주석처리 하니까 갑자기 포스트잇이 회전이 된다.
 
         //add text view node
@@ -267,9 +273,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         postitNode.setOnTapListener((hitTestResult, motionEvent) -> {
             //select it on touching so we can rotate it and position it as needed
             postitNode.select();
-            Node nodeToRemove = hitTestResult.getNode();
-            anchorNode.removeChild(nodeToRemove );
-
+            if(!isTagger)
+            {
+                Node nodeToRemove = hitTestResult.getNode();
+                anchorNode.removeChild(nodeToRemove);
+            }
 //            //toggle the edit text view.
 //            if (editTextConstraintLayout.getVisibility() == View.GONE) {
 //                editTextConstraintLayout.setVisibility(View.VISIBLE);
