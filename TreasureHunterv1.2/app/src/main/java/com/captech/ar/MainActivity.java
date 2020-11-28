@@ -105,8 +105,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private String UserNickname; //user이름
     private int setHidingtime; //보물을 숨기는 시간
     private int setFindingtime; //보물을 찾는 시간
-    private int setNumberOfTreasure; //보물의 개수
-    private int score; //점수
+    private int setNumberOfTreasure = 0; //보물의 개수
+    private int score = 0; //점수
     private boolean isFindingTreasure=false; //보물을 찾고 있는가?
     private TextView UserInfo; //user정보
     private String ISFINDINGTREASURE; //보물을 숨기고 있으면 "보물을 숨기는 중"
@@ -169,7 +169,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         new GestureDetector.SimpleOnGestureListener() {
                             @Override
                             public boolean onSingleTapUp(MotionEvent e) {
-                                tapAddObject(e);
+                                if(!isFindingTreasure) {
+                                    tapAddObject(e);
+                                }
                                 return true;
                             }
 
@@ -252,7 +254,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     ((Plane) trackable).isPoseInPolygon(hit.getHitPose()))) {
                 //set the 3d model to the anchor
                 buildRenderable(mFragment, hit.createAnchor());
-
+                setNumberOfTreasure++;
                 //remove selected item after a successful set.
                 selectedId = -1;
                 postImageView.setBackground(null);
@@ -298,7 +300,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         postitNode.setParent(anchorNode);
 
         //rotate the post it to stick to the flat surface.
-        postitNode.setLocalRotation(new Quaternion(.65f, 0f, 0f, -.5f));
+        //postitNode.setLocalRotation(new Quaternion(.65f, 0f, 0f, -.5f));
 
         //add text view node
         ViewRenderable.builder().setView(this, R.layout.post_it_text).build()
@@ -314,28 +316,36 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         postitNode.setOnTapListener((hitTestResult, motionEvent) -> {
             //select it on touching so we can rotate it and position it as needed
             postitNode.select();
+            if(isFindingTreasure)
+            {
+                setNumberOfTreasure--;
+                score += 100;
+                Node nodeToRemove = hitTestResult.getNode();
+                anchorNode.removeChild(nodeToRemove);
+            }
+
 
             //toggle the edit text view.
-            if (editTextConstraintLayout.getVisibility() == View.GONE) {
-                editTextConstraintLayout.setVisibility(View.VISIBLE);
-
-                //save the text when the user wants to
-                saveTextButton.setOnClickListener(view -> {
-                    TextView tv;
-                    for (Node nodeInstance : postitNode.getChildren()) {
-                        if (nodeInstance.getRenderable() instanceof ViewRenderable) {
-                            tv = ((ViewRenderable) nodeInstance.getRenderable()).getView().findViewById(R.id.postItNoteTextView);
-                            tv.setText(editTextField.getText());
-                            editTextConstraintLayout.setVisibility(View.GONE);
-                            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-                            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
-                            break;
-                        }
-                    }
-                });
-            } else {
-                editTextConstraintLayout.setVisibility(View.GONE);
-            }
+//            if (editTextConstraintLayout.getVisibility() == View.GONE) {
+//                editTextConstraintLayout.setVisibility(View.VISIBLE);
+//
+//                //save the text when the user wants to
+//                saveTextButton.setOnClickListener(view -> {
+//                    TextView tv;
+//                    for (Node nodeInstance : postitNode.getChildren()) {
+//                        if (nodeInstance.getRenderable() instanceof ViewRenderable) {
+//                            tv = ((ViewRenderable) nodeInstance.getRenderable()).getView().findViewById(R.id.postItNoteTextView);
+//                            tv.setText(editTextField.getText());
+//                            editTextConstraintLayout.setVisibility(View.GONE);
+//                            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+//                            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+//                            break;
+//                        }
+//                    }
+//                });
+//            } else {
+//                editTextConstraintLayout.setVisibility(View.GONE);
+//            }
         });
 
 
