@@ -9,6 +9,7 @@ import android.widget.Button;
 
 public class ConvertToFinding extends AppCompatActivity {
 
+    public static Integer num1;
     Button btn_convert;
 //public static int isbutton=0;
 
@@ -17,17 +18,12 @@ public class ConvertToFinding extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_convert_to_finding);
 
-        Intent intent = getIntent();
-
         btn_convert=findViewById(R.id.btn_convert);
         btn_convert.setOnClickListener(new View.OnClickListener(){
 
             @Override
             public void onClick(View v) {
-               Intent intent = new Intent(ConvertToFinding.this,MainActivity.class);
-               intent.putExtra("isbutton",1);
-               startActivity(intent);
-               finish();
+              finish();
             }
         });
 

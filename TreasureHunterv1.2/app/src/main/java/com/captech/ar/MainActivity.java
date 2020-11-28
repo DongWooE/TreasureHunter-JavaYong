@@ -96,13 +96,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 isFindingTreasure=true;
                 Intent intent=new Intent(MainActivity.this,ConvertToFinding.class);
                 startActivity(intent);
-                isbutton1 = intent.getIntExtra("isbutton");
+
                 Hidinghandler.removeCallbacks(runnable);
                 TextViewMain.setText(""); //int형으로 넣으면 오류나고 뒤에 ""붙여서 스트링으로
-               //if(){
+
                     FindView.setText("");   //1초 간격으로 출력
                     Findinghandler.post(runnable_find);
-                //}
 
             } else {
                 Hidinghandler.postDelayed(runnable, 1000);
@@ -133,8 +132,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             count_find -= 1;
             if (count_find <= 0) {
                 isFindingTreasure=false;
-                Intent intent=new Intent(MainActivity.this,ScoreActivity.class);
-                startActivity(intent);
+                //Intent intent=new Intent(MainActivity.this,ScoreActivity.class);
+               // startActivity(intent);
                 Findinghandler.removeCallbacks(runnable_find);
                 FindView.setText(""); //int형으로 넣으면 오류나고 뒤에 ""붙여서 스트링으로
             } else {
