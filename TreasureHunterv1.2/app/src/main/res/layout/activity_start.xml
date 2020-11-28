@@ -7,6 +7,7 @@ android:layout_width="match_parent"
 android:layout_height="match_parent"
 tools:context="Maininterface.StartActivity">
 
+
     <TextView
         android:id="@+id/tv_name"
         android:layout_width="wrap_content"
@@ -25,6 +26,7 @@ tools:context="Maininterface.StartActivity">
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="24dp"
+        android:background="@drawable/selector_view"
         android:fontFamily="@font/hoonwhitecat"
         android:paddingLeft="30sp"
         android:paddingRight="30sp"
@@ -42,6 +44,7 @@ tools:context="Maininterface.StartActivity">
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="80dp"
+        android:background="@drawable/selector_view"
         android:fontFamily="@font/hoonwhitecat"
         android:paddingLeft="30sp"
         android:paddingRight="30sp"
@@ -58,6 +61,7 @@ tools:context="Maininterface.StartActivity">
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="144dp"
+        android:background="@drawable/selector_view"
         android:fontFamily="@font/hoonwhitecat"
         android:paddingLeft="30sp"
         android:paddingRight="30sp"
@@ -68,6 +72,5 @@ tools:context="Maininterface.StartActivity">
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.512"
         app:layout_constraintStart_toStartOf="parent" />
-
 
 </android.support.constraint.ConstraintLayout>
