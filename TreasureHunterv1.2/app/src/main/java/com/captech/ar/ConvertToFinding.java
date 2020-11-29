@@ -2,10 +2,13 @@ package com.captech.ar;
 
 import android.content.Intent;
 import android.os.CountDownTimer;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+
+import Maininterface.StartActivity;
 
 public class ConvertToFinding extends AppCompatActivity { // 보물을 숨기는 시간이 모두 지나면 화면을 전환하는 메소드 by 김동용
 
@@ -23,5 +26,9 @@ public class ConvertToFinding extends AppCompatActivity { // 보물을 숨기는
                 finish(); //메소드 종료
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
     }
 }

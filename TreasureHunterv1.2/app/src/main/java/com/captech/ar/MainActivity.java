@@ -259,9 +259,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         alBuilder.setMessage("메인화면으로 돌아가시겠습니까?");
 
         alBuilder.setPositiveButton("예", new DialogInterface.OnClickListener() {
+            // 도중에 게임을 종료시에 모든 타이머와 boolean값을 변경해주는 함수 by 이동우
             @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
+            public void onClick(DialogInterface dialogInterface, int i) {  
                 GameRuleActivity.isNext = false;
+                if(!isFindingTreasure) Hidinghandler.removeCallbacks(runnable);
+                Findinghandler.removeCallbacks(runnable_find); 
                 finish();
             }
         });
