@@ -35,8 +35,13 @@ public class ScoreActivity extends AppCompatActivity {
                 GameRuleActivity.setHidingtime =0;
                 GameRuleActivity.userNickName = null;
                 MainActivity.score =0;
+                GameRuleActivity.isNext = false;
             }
         });
+
+
     }
+    @Override
+    public void onBackPressed() {}
 
 }

@@ -18,7 +18,6 @@
         android:theme="@style/AppTheme.NoActionBar">
         <activity android:name=".ScoreActivity"></activity>
         <activity android:name=".ConvertToFinding" />
-        <activity android:name=".SettingActivity" />
         <activity android:name=".GameRuleActivity" />
 
         <meta-data
