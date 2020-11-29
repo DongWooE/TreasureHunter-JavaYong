@@ -6,25 +6,26 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-
+    <!--ar메인화면에 대한 화면구성 by 이동우, 김동용, 차재현-->
     <include
         android:id="@+id/include"
         layout="@layout/content_main" />
 
-    <!-- 여기는 타이머를 위한 공간-->
-      <TextView
-          android:id="@+id/TextViewMain"
-          android:layout_width="120dp"
-          android:layout_height="200dp"
-          android:textSize="100sp"
-          app:layout_anchor="@+id/include"
-          app:layout_anchorGravity="center"
-          app:layout_constraintBottom_toBottomOf="@+id/fab"
-          app:layout_constraintLeft_toLeftOf="parent"
-          app:layout_constraintRight_toRightOf="parent"
-          app:layout_constraintTop_toTopOf="parent" />
-    <!--여기까지 타이머 공간-->
+    <!-- 여기는 보물을 숨기는 타이머를 위한 공간-->
+    <TextView
+        android:id="@+id/TextViewMain"
+        android:layout_width="120dp"
+        android:layout_height="200dp"
+        android:textSize="100sp"
+        app:layout_anchor="@+id/include"
+        app:layout_anchorGravity="center"
+        app:layout_constraintBottom_toBottomOf="@+id/fab"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+    <!--여기까지 보물을 숨기는 타이머 공간-->
 
+    <!--보물을 찾는 타이머 공간-->
     <TextView
         android:id="@+id/FindView"
         android:layout_width="120dp"
@@ -37,6 +38,7 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <!--유저정보를 출력하는 공간-->
     <TextView
         android:id="@+id/UserInfo"
         android:textColor="#C0CF25"
@@ -46,6 +48,7 @@
         android:textSize="20sp"
         android:layout_gravity="top|end"/>
 
+    <!--카메라버튼에 대한 공간-->
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab"
         android:layout_width="wrap_content"

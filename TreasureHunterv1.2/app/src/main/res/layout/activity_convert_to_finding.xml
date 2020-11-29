@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".ConvertToFinding">
 
-
+    <!--보물을 숨기는 시간이 모두 지나고 화면전환하는 버튼 by 김동용-->
     <Button
         android:id="@+id/btn_convert"
         android:layout_width="152dp"

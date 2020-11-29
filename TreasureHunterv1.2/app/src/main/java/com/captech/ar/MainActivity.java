@@ -80,7 +80,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private FloatingActionButton fab;
     private int selectedId = -1;
     static final int REQUEST_CODE = 100;
-    boolean isbutton = false;
 
     //여기는 setHidingtime 변수
     private Integer count = GameRuleActivity.setHidingtime;    //카운트다운 시작숫자
@@ -118,29 +117,29 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-    //여기는 setfindingtime 변수
+    //여기는 보물을 찾는 메소드 by 김동용
     private Integer count_find = GameRuleActivity.setFindingtime;    //카운트다운 시작숫자
-    private TextView FindView;
-    private Handler Findinghandler = new Handler();
+    private TextView FindView; //텍스트뷰 변수 선언
+    private Handler Findinghandler = new Handler(); //보물을 찾는 핸들러 선언
 
-    private Runnable runnable_find = new Runnable() {
+    private Runnable runnable_find = new Runnable() { //보물을 찾는 runnable 선언
         @Override
         public void run() {
             FindView.setText(count_find + ""); //int형으로 넣으면 오류나고 뒤에 ""붙여서 스트링으로  만들기
-            count_find -= 1;
-            if (count_find <= 0) {
-                isFindingTreasure=false;
-                Intent intent=new Intent(MainActivity.this,ScoreActivity.class);
-                startActivity(intent);
-                Findinghandler.removeCallbacks(runnable_find);
-                FindView.setText(""); //int형으로 넣으면 오류나고 뒤에 ""붙여서 스트링으로
-            } else {
-                Findinghandler.postDelayed(runnable_find, 1000);
+            count_find -= 1; //보물을 찾는 시간 -1
+            if (count_find <= 0) { //보물을 찾는 시간이 0이 되면
+                isFindingTreasure=false; //보물을 찾지 않고 있다
+                Intent intent=new Intent(MainActivity.this,ScoreActivity.class); //intent로 점수출력하는 activity로 이동
+                startActivity(intent); //intent 실행
+                Findinghandler.removeCallbacks(runnable_find); //보물을 찾는 핸들러 종료
+                FindView.setText(""); //텍스트뷰의 스트링 없음으로 초기화
+            } else { //보물을 찾는 시간이 1이상이면
+                Findinghandler.postDelayed(runnable_find, 1000); //1초씩 지연하여 runnable작동(타이머 기능)
             }
         }
     };
 
-    //user정보에 대한 변수
+    //user정보에 대한 변수 by김동용
     private int setHidingtime; //보물을 숨기는 시간
     private int setFindingtime; //보물을 찾는 시간
     private int setNumberOfTreasure = 0; //보물의 개수
@@ -150,7 +149,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private String ISFINDINGTREASURE = "보물을 찾는 중"; //보물을 숨기고 있으면 "보물을 숨기는 중"
     private Handler UIhandler = new Handler();
 
-    private Runnable UIrunnable = new Runnable() {
+    private Runnable UIrunnable = new Runnable() { //유저정보를 우상단에 출력하는 메소드 by 김동용
         @Override
         public void run() {
             UserInfo.setText("닉네임 : " + GameRuleActivity.userNickName+"\n"+
@@ -158,16 +157,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     "보물을 찾는 시간 : "+count_find+"\n"+
                     "보물의 갯수 : "+setNumberOfTreasure+"\n"+
                     GameRuleActivity.userNickName+"의 점수 : "+score+"\n"+
-                    ISFINDINGTREASURE+"\n");
-            if(isFindingTreasure){
-                ISFINDINGTREASURE="보물을 찾는 중";
-                //UIhandler.postDelayed(UIrunnable,0);
-            }
-            else{
-                ISFINDINGTREASURE="보물을 숨기는 중";
-                //UIhandler.removeCallbacks(UIrunnable);
-            }
-            UIhandler.postDelayed(UIrunnable,0);
+                    ISFINDINGTREASURE+"\n"); //유저정보 출력
+            if(isFindingTreasure) //보물을 찾고 있으면
+                ISFINDINGTREASURE="보물을 찾는 중"; //문자열 변경
+            else //아니면
+                ISFINDINGTREASURE="보물을 숨기는 중"; //문자열 변경
+            UIhandler.postDelayed(UIrunnable,0); //지연없이 실시간으로 runnable 작동
         }
     };
 
@@ -190,18 +185,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         //on tapping of the scene, we want to interact with the world
         mFragment.getArSceneView().getScene().setOnTouchListener((hitTestResult, motionEvent) -> mGestureDetector.onTouchEvent(motionEvent));
 
-        FindView = findViewById(R.id.FindView);
+        //여기서부터 타이머 by 차재현
+        TextViewMain = findViewById(R.id.TextViewMain);
+        TextViewMain.setText("");   //1초 간격으로 출력, setText 초기값으로 초기화
+        Hidinghandler.post(runnable);
+        //여기까지 타이머
 
-            //여기서부터 타이머
-            TextViewMain = findViewById(R.id.TextViewMain);
-            TextViewMain.setText("");   //1초 간격으로 출력, setText 초기값으로 초기화
-            Hidinghandler.post(runnable);
-            //여기까지 타이머
+        //보물을 찾는 시간으로 게임을 제어하는 코드 by 김동용
+        FindView = findViewById(R.id.FindView); //보물을 찾는 시간에 대한 텍스트뷰 연결
 
-        //userinfo start
-        UserInfo=findViewById(R.id.UserInfo);
-        UserInfo.setText("");
-        Hidinghandler.post(UIrunnable);
+        //유저정보를 출력하는 코드 by 김동용
+        UserInfo=findViewById(R.id.UserInfo); //xml의 유저정보id와 유저정보변수를 연결
+        UserInfo.setText(""); //문자열을 없음으로 초기화
+        Hidinghandler.post(UIrunnable); //유저정보runnable과 핸들러 연결
         //userinfo end
 
         mGestureDetector =  //사용자로부터 터치 제스쳐를 받고 술래가 보물을 원하는 위치에 설치할 수 있도록 해줌 by 박성진.
