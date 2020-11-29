@@ -169,16 +169,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public static int score = 0; //점수
     private boolean isFindingTreasure=false; //보물을 찾고 있는가?
     private TextView UserInfo; //user정보
+    private TextView UserName;
+    private TextView Score;
     private String ISFINDINGTREASURE = "보물을 찾는 중"; //보물을 숨기고 있으면 "보물을 숨기는 중"
     private Handler UIhandler = new Handler();
 
     private Runnable UIrunnable = new Runnable() { //유저정보를 우상단에 출력하는 메소드 by 김동용
         @Override
         public void run() {
-            UserInfo.setText("닉네임 : " + GameRuleActivity.userNickName+"\n"+
-                    "보물의 갯수 : "+setNumberOfTreasure+"\n"+
-                    GameRuleActivity.userNickName+"의 점수 : "+score+"\n"+
-                    ISFINDINGTREASURE+"\n"); //유저정보 출력
+            //GameRuleActivity.userNickName+"\n"
+            //score+"\n"+ ISFINDINGTREASURE+"\n"+GameRuleActivity.userNickName+"의 점수 : "+
+            UserInfo.setText("X"+setNumberOfTreasure); //유저정보 출력
+            UserName.setText("Nickname: "+GameRuleActivity.userNickName); //유저정보 출력
+            Score.setText(GameRuleActivity.userNickName+"의 점수\n"+ISFINDINGTREASURE+"\n"); //유저정보 출력
             if(isFindingTreasure) //보물을 찾고 있으면
                 ISFINDINGTREASURE="보물을 찾는 중"; //문자열 변경
             else //아니면
@@ -216,6 +219,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         //유저정보를 출력하는 코드 by 김동용
         UserInfo=findViewById(R.id.UserInfo); //xml의 유저정보id와 유저정보변수를 연결
+        Score=findViewById(R.id.Score); //xml의 유저정보id와 유저정보변수를 연결
+        UserName=findViewById(R.id.UserName); //xml의 유저정보id와 유저정보변수를 연결
         UserInfo.setText(""); //문자열을 없음으로 초기화
         Hidinghandler.post(UIrunnable); //유저정보runnable과 핸들러 연결
         //userinfo end
