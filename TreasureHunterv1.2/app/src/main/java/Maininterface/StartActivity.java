@@ -48,7 +48,7 @@ public class StartActivity extends AppCompatActivity {
         btn_multi = findViewById(R.id.btn_multi);
         btn_exit = findViewById(R.id.btn_exit);
 
-        //btn_start(혼자 하기) 버튼을 눌렀을떄의 이밴트
+        //btn_start(혼자 하기) 버튼을 눌렀을떄의 이벤트
         btn_start.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -72,7 +72,7 @@ public class StartActivity extends AppCompatActivity {
             }
         });
 
-        //btn_exit( 나가기 ) 버튼을 눌렀을떄의 이밴트
+        //btn_exit( 나가기 ) 버튼을 눌렀을떄의 이벤트
         btn_exit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
