@@ -19,7 +19,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <Button
+    <ImageView
         android:id="@+id/btn_setting"
         android:layout_width="80dp"
         android:layout_height="63dp"
@@ -27,6 +27,7 @@
         android:text="설정"
         android:textSize="30sp"
         android:fontFamily="@font/hoonwhitecat"
+        android:src="@drawable/ic_baseline_settings_24"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.515"
         app:layout_constraintStart_toEndOf="@+id/textView4"

@@ -94,6 +94,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             if (count <= 0) {
                 isFindingTreasure=true;
                 Intent intent= new Intent(MainActivity.this,ConvertToFinding.class);
+
+                // 술래가 Finder에게 넘기는 액티비티 이후에 타이머가 흘러가는 것을 방지하기위해 startActivityForResult를 사용 by 이동우
                 startActivityForResult(intent, REQUEST_CODE);
 
                 Hidinghandler.removeCallbacks(runnable);
@@ -105,13 +107,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     };
 
+    // 술래가 Finder에게 넘기는 액티비티 이후에 타이머가 흘러가는 것을 방지하기위한 함수 by 이동우
    @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == REQUEST_CODE)
         {
+            //만약 이후 액티비티에서 RESULT_OK를 넘겨받는다면 다음 타이머가 작동하도록 설정
             if(resultCode == RESULT_OK){
-                FindView.setText("");   //1초 간격으로 출력
+                FindView.setText("");
                 Findinghandler.post(runnable_find);
             }
         }

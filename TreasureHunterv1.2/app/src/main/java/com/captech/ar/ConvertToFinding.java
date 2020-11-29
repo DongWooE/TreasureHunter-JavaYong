@@ -19,7 +19,7 @@ public class ConvertToFinding extends AppCompatActivity { // 보물을 숨기는
         btn_convert.setOnClickListener(new View.OnClickListener(){ //버튼클릭이 감지되면
             @Override //오버라이드
             public void onClick(View v) { //버튼을 클릭하면
-                setResult(RESULT_OK); //결과값으로 RESULT_OK를 반환
+                setResult(RESULT_OK); //startActivityForResult, 값 비교를 위해 RESULT_OK를 반환 by 이동우
                 finish(); //메소드 종료
             }
         });
