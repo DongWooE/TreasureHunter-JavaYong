@@ -2,7 +2,11 @@ package com.captech.ar;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.media.AudioAttributes;
+import android.media.AudioManager;
 import android.media.Image;
+import android.media.SoundPool;
+import android.os.Build;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -18,6 +22,11 @@ import Maininterface.StartActivity;
 
 // 사용자에게 간단한 메세지를 보여주고 각종 설정들을 입력받는 class by 차재현 & 이동우.
 public class GameRuleActivity extends AppCompatActivity {
+
+    SoundPool soundPool;    // 소리출력 할당을 받는 변수
+    int buttonsound;    // 버튼소리
+    int mapsound;       // 지도펼치는 소리
+    int pencilsound;    // 글 쓰는 소리
 
     //현재 액티비티에서 받은 사용자의 정보들을 뒤의 액티비티에서도 사용할 수 있도록 static 으로 선언
     public static String userNickName;
@@ -44,6 +53,8 @@ public class GameRuleActivity extends AppCompatActivity {
         btn_setting.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //버튼을 누를때마다 효과음 발생
+                soundPool.play(pencilsound,1,1,1,0,1);
                 show();
                 if(isNext) finish();
             }
@@ -52,8 +63,11 @@ public class GameRuleActivity extends AppCompatActivity {
         btn_backtomain.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //버튼을 누를때마다 효과음 발생
+                //soundPool.play(mapsound,1,1,1,0,1);
                 Intent intent = new Intent(GameRuleActivity.this, StartActivity.class);
                 startActivity(intent);      //게임 룰에서 메인화면으로 이동
+
                 finish();
             }
         });
@@ -79,6 +93,8 @@ public class GameRuleActivity extends AppCompatActivity {
         buttonSet.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //버튼을 누를때마다 효과음 발생
+                soundPool.play(buttonsound,1,1,1,0,1);
                 //Interger 변수들을 초기화
                 Integer rt1 = 60, rt2 =60, rt3=5;
 
@@ -124,6 +140,8 @@ public class GameRuleActivity extends AppCompatActivity {
         alBuilder.setPositiveButton("예", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
+                //버튼을 누를때마다 효과음 발생
+                soundPool.play(buttonsound,1,1,1,0,1);
                 GameRuleActivity.isNext = false;
                 ActivityCompat.finishAffinity(GameRuleActivity.this);
                 System.exit(0); //어플리케이션 종료
@@ -133,11 +151,44 @@ public class GameRuleActivity extends AppCompatActivity {
         alBuilder.setNegativeButton("아니오", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
+                //버튼을 누를때마다 효과음 발생
+                soundPool.play(buttonsound,1,1,1,0,1);
                 return;
             }
         });
         alBuilder.setTitle("게임 종료");
         alBuilder.show();}
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        //버튼사운드 할당
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
+            AudioAttributes audioAttributes = new AudioAttributes.Builder()
+                    .setUsage(AudioAttributes.USAGE_GAME)
+                    .setContentType(AudioAttributes.CONTENT_TYPE_MUSIC)
+                    .build();
+
+            soundPool = new SoundPool.Builder()
+                    .setAudioAttributes(audioAttributes)
+                    .setMaxStreams(6)
+                    .build();
+        }
+        else {
+            soundPool = new SoundPool(6, AudioManager.STREAM_MUSIC,0);
+        }
+
+        buttonsound = soundPool.load(getApplicationContext(),R.raw.button,1);
+        mapsound = soundPool.load(getApplicationContext(),R.raw.openmap,1);
+        pencilsound = soundPool.load(getApplicationContext(),R.raw.realpencil,1);
+    }
+
+    //버튼 사운드 해제
+    @Override
+    protected void onStop() {
+        super.onStop();
+        soundPool.release();
+    }
 
 }
 
