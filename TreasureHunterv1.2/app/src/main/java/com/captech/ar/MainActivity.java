@@ -68,7 +68,7 @@ import com.google.ar.sceneform.ux.TransformableNode;
  * limitations under the License.
  */
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {   //MainActivity class
 
 
     private ArFragment mFragment;
@@ -172,7 +172,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     };
 
 
-    @Override
+    @Override   //Application속 실행주기의 맨 처음에 있는 method. by 김동용,박성진,차재현,이동우
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
@@ -204,7 +204,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Hidinghandler.post(UIrunnable);
         //userinfo end
 
-        mGestureDetector =
+        mGestureDetector =  //사용자로부터 터치 제스쳐를 받고 술래가 보물을 원하는 위치에 설치할 수 있도록 해줌 by 박성진.
                 new GestureDetector(
                         this,
                         new GestureDetector.SimpleOnGestureListener() {
@@ -232,7 +232,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     @Override
-    public void onClick(View view) {
+    public void onClick(View view) {    //사용자가 앱 하단에 보물을 선택했는지 안했는지에 따라 이미지 출력의 변화 by 박성진.
         switch (view.getId()) {
             case R.id.postIcon:
                 if (selectedId == R.id.postIcon) {
@@ -281,15 +281,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
      *
      * @param motionEvent
      */
-    private void tapAddObject(MotionEvent motionEvent) {
+    private void tapAddObject(MotionEvent motionEvent) {    //술래가 원하는 위치에 터치를 해서 보물을 놓을 수 있도록 함 by 박성진.
         Frame frame = mFragment.getArSceneView().getArFrame();
 
-        if (selectedId == -1 || motionEvent == null || frame == null ||
+        if (selectedId == -1 || motionEvent == null || frame == null || //앱 하단에 보물이 활성화(터치)되어 있지 않거나 모션 이벤트가 발생하지 않았을 경우 그냥 아무 작업없이 리턴 by 박성진.
                 frame.getCamera().getTrackingState() != TrackingState.TRACKING)
             return;
 
 
-        for (HitResult hit : frame.hitTest(motionEvent)) {
+        for (HitResult hit : frame.hitTest(motionEvent)) {  //사용자의 모션 이벤트가 감지될 때마다 보물 Anchor를 만들어서 원하는 위치에 출력, 보물의 개수도 증가. by 박성진.
             Trackable trackable = hit.getTrackable();
             if ((trackable instanceof Plane &&
                     ((Plane) trackable).isPoseInPolygon(hit.getHitPose()))) {
@@ -297,7 +297,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 buildRenderable(mFragment, hit.createAnchor());
                 setNumberOfTreasure++;
                 //remove selected item after a successful set.
-                selectedId = -1;
+                selectedId = -1;    //보물을 설치하고 나서 앱 하단에 비활성화로 전환.
                 postImageView.setBackground(null);
                 break;
 
@@ -311,7 +311,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
      * @param fragment
      * @param anchor
      */
-    private void buildRenderable(ArFragment fragment, Anchor anchor) {
+    private void buildRenderable(ArFragment fragment, Anchor anchor) {  //우리가 설정한 3D modeling 보물을 출력하는 메소드 by 박성진.
         ModelRenderable.builder()
                 .setSource(fragment.getContext(), Uri.parse("model.sfb"))
                 .build()
@@ -334,7 +334,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
      * @param anchor
      * @param renderable
      */
-    private void addNodeToScene(ArFragment fragment, Anchor anchor, Renderable renderable) {
+    private void addNodeToScene(ArFragment fragment, Anchor anchor, Renderable renderable) {    //보물 Anchor의 사이즈를 조절하고 보물 Anchor를 사용자가 터치하면 사자리며 점수를 획득 by 박성진.
         AnchorNode anchorNode = new AnchorNode(anchor);
         TransformableNode postitNode = new TransformableNode(fragment.getTransformationSystem());
         postitNode.setRenderable(renderable);
@@ -344,20 +344,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         //postitNode.setLocalRotation(new Quaternion(.65f, 0f, 0f, -.5f));
 
         //add text view node
-        ViewRenderable.builder().setView(this, R.layout.post_it_text).build()
-                .thenAccept(viewRenderable -> {
-                    Node noteText = new Node();
-                    noteText.setParent(fragment.getArSceneView().getScene());
-                    noteText.setParent(postitNode);
-                    noteText.setRenderable(viewRenderable);
-                    noteText.setLocalPosition(new Vector3(0.0f, -0.05f, 0f));
-                });
+//        ViewRenderable.builder().setView(this, R.layout.post_it_text).build()
+//                .thenAccept(viewRenderable -> {
+//                    Node noteText = new Node();
+//                    noteText.setParent(fragment.getArSceneView().getScene());
+//                    noteText.setParent(postitNode);
+//                    noteText.setRenderable(viewRenderable);
+//                    noteText.setLocalPosition(new Vector3(0.0f, -0.05f, 0f));
+//                });
 
         //adding a tap listener to change the text of a note
         postitNode.setOnTapListener((hitTestResult, motionEvent) -> {
             //select it on touching so we can rotate it and position it as needed
             postitNode.select();
-            if(isFindingTreasure)
+            if(isFindingTreasure)   //보물을 찾는 모드일 때 보물을 터치하게되면 보물이 사라지고 100점을 얻는다.
             {
                 setNumberOfTreasure--;
                 score += 100;

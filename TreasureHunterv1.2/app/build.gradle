@@ -38,13 +38,7 @@ dependencies {
 
 apply plugin: 'com.google.ar.sceneform.plugin'
 
-
-
-sceneform.asset('sampledata/post_it.obj',
-        'default',
-        'sampledata/post_it.sfa',
-        'src/main/assets/post_it')
-
+//3D 모델링한 보물상자를 AR 소스로 사용 by 박성진
 sceneform.asset('sampledata/model.obj',
         'default',
         'sampledata/model.sfa',
