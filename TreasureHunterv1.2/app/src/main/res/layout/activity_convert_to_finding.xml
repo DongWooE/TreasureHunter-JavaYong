@@ -4,19 +4,38 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/treasuremap"
     tools:context=".ConvertToFinding">
-
     <!--보물을 숨기는 시간이 모두 지나고 화면전환하는 버튼 by 김동용-->
-    <Button
+
+    <ImageView
         android:id="@+id/btn_convert"
-        android:layout_width="152dp"
-        android:layout_height="71dp"
-        android:fontFamily="@font/hoonwhitecat"
-        android:text="버튼을 누르면 게임시작"
+        android:layout_width="120dp"
+        android:layout_height="180dp"
+
+        android:layout_marginBottom="16dp"
+
+        android:background="@drawable/pirate"
+        app:layout_constraintBottom_toTopOf="@+id/textView5"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="200dp"
+        android:layout_height="100dp"
+        android:layout_marginBottom="204dp"
+        android:fontFamily="@font/vlad"
+        android:text="press the Image to find treasure"
+        android:textAlignment="center"
+        android:textColor="#000"
         android:textSize="28sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </android.support.constraint.ConstraintLayout>

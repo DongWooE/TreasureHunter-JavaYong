@@ -77,7 +77,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private ConstraintLayout editTextConstraintLayout;
     private EditText editTextField;
     private Button saveTextButton;
-    private FloatingActionButton fab;
     private int selectedId = -1;
     static final int REQUEST_CODE = 100;
 
@@ -195,7 +194,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
-        fab = findViewById(R.id.fab);
         postImageView = findViewById(R.id.postIcon);
         editTextConstraintLayout = findViewById(R.id.changePostItTextConstraintLayout);
         saveTextButton = findViewById(R.id.saveTextButton);
@@ -241,8 +239,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         });
 
 
-        //take a photo on clicking of the fab
-        fab.setOnClickListener(view -> PhotoUtils.takePhoto(mFragment));
 
         //click listener for selecting that you want to post a note.
         postImageView.setOnClickListener(this);

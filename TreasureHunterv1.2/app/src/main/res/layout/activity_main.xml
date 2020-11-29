@@ -53,13 +53,4 @@
         android:textSize="20sp"
         android:layout_gravity="top|end"/>
 
-    <!--카메라버튼에 대한 공간-->
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_margin="@dimen/fab_margin"
-        app:srcCompat="@android:drawable/ic_menu_camera"/>
-
 </android.support.design.widget.CoordinatorLayout>

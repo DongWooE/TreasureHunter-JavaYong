@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:paddingTop="100dp"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/treasuremap"
     android:orientation="vertical">
 
 
@@ -13,18 +16,21 @@
         >
 
         <TextView
+            android:textColor="#000"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/whitecat"
-            android:text="닉네임 :"
+            android:fontFamily="@font/vlad"
+            android:text="Name : "
             android:textSize="30sp"
             />
+
         <EditText
             android:id="@+id/etNick"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="차재현"
-            />
+            android:fontFamily="@font/vlad"
+            android:hint="User"
+            android:textColor="#000" />
 
     </LinearLayout>
 
@@ -36,14 +42,16 @@
         >
 
         <TextView
+            android:textColor="#000"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="보물을 숨기는 시간 :"
-            android:fontFamily="@font/whitecat"
-            android:textSize="20sp"
+            android:text="Time to Hide Treasure :"
+            android:fontFamily="@font/vlad"
+            android:textSize="30sp"
             />
         <EditText
             android:id="@+id/etHide"
+            android:fontFamily="@font/vlad"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             />
@@ -57,27 +65,27 @@
         >
 
         <TextView
+            android:textColor="#000"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="보물을 찾는 시간 :"
-            android:fontFamily="@font/whitecat"
-            android:textSize="20sp"
+            android:text="Time to Find Treasure :"
+            android:fontFamily="@font/vlad"
+            android:textSize="30sp"
             />
         <EditText
             android:id="@+id/etFind"
+            android:fontFamily="@font/vlad"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             />
 
     </LinearLayout>
 
-    <Button
+    <ImageView
         android:id="@+id/buttonSet"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="다음으로"
-        android:textSize="20sp"
-        />
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:src="@drawable/next" />
 
 
 </LinearLayout>

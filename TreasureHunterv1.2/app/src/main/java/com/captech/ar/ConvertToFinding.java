@@ -7,12 +7,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 
 import Maininterface.StartActivity;
 
 public class ConvertToFinding extends AppCompatActivity { // 보물을 숨기는 시간이 모두 지나면 화면을 전환하는 메소드 by 김동용
 
-    Button btn_convert; //화면전환 버튼
+    ImageView btn_convert; //화면전환 버튼
 
     @Override //오버라이드
     protected void onCreate(Bundle savedInstanceState) {

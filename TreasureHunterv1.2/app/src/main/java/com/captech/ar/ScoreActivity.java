@@ -1,17 +1,19 @@
 package com.captech.ar;
 
 import android.content.Intent;
+import android.media.Image;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import Maininterface.StartActivity;
 
 public class ScoreActivity extends AppCompatActivity {
     TextView Scoreview;
-    Button btn_gotomain;
+    ImageView btn_gotomain;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -4,10 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/treasuremap"
     tools:context=".ScoreActivity">
 
 
-    <Button
+    <ImageView
+        android:src="@drawable/back"
         android:id="@+id/btn_gotomain"
         android:layout_width="201dp"
         android:layout_height="62dp"
@@ -20,9 +22,11 @@
         app:layout_constraintVertical_bias="0.852" />
 
     <TextView
+        android:textColor="#000"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="100dp"
+        android:fontFamily="@font/vlad"
         android:text="Score"
         android:textSize="100sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -30,10 +34,13 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
+        android:textStyle="bold"
+        android:textColor="#000"
         android:id="@+id/Scoreview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="296dp"
+        android:fontFamily="@font/vlad"
         android:text="1000"
         android:textSize="100sp"
         app:layout_constraintEnd_toEndOf="parent"

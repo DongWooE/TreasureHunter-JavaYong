@@ -2,6 +2,7 @@ package com.captech.ar;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.media.Image;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -70,7 +71,7 @@ public class GameRuleActivity extends AppCompatActivity {
         final EditText etNick = view.findViewById(R.id.etNick);
         final EditText etHide = view.findViewById(R.id.etHide);
         final EditText etFind = view.findViewById(R.id.etFind);
-        final Button buttonSet = view.findViewById(R.id.buttonSet);
+        final ImageView buttonSet = view.findViewById(R.id.buttonSet);
 
         final AlertDialog dialog = builder.create();
 
