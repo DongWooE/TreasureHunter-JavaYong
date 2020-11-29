@@ -1,5 +1,7 @@
 package Maininterface;
 
+import android.graphics.drawable.AnimationDrawable;
+import android.media.Image;
 import android.media.MediaPlayer;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -14,6 +16,7 @@ import com.captech.ar.R;
 import android.content.Intent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 //어플의 가장 초기화면 by 이동우
@@ -24,6 +27,11 @@ public class StartActivity extends AppCompatActivity {
     Button btn_start;
     Button btn_multi;
     Button btn_exit;
+
+
+    AnimationDrawable shipAnimation;
+
+
 
     //액티비티가 종료될때 이 메소드를 실행함
     @Override
@@ -39,6 +47,7 @@ public class StartActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start);
+
 
         mediaPlayer = MediaPlayer.create(StartActivity.this,R.raw.mainbgm);
         mediaPlayer.start();
@@ -62,6 +71,8 @@ public class StartActivity extends AppCompatActivity {
                 finish();
             }
         });
+
+
         
         //btn_multi(같이 하기) 버튼을 눌렀을떄의 이벤트
         btn_multi.setOnClickListener(new View.OnClickListener() {
@@ -81,6 +92,18 @@ public class StartActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+
+    //시작화면에 애니메이션을 활용한 배경화면 설정 By 박성진.
+    @Override
+    public void onStart()
+    {
+        super.onStart();
+        ImageView ship = (ImageView) findViewById(R.id.ship);
+        ship.setBackgroundResource(R.drawable.background);
+        shipAnimation = (AnimationDrawable) ship.getBackground();
+        shipAnimation.start();
     }
 
 
