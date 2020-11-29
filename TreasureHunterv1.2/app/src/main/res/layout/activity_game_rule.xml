@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/treasuremap"
     tools:context=".GameRuleActivity">
 
 
@@ -11,78 +12,92 @@
         android:id="@+id/btn_setting"
         android:layout_width="80dp"
         android:layout_height="63dp"
-        android:layout_marginTop="92dp"
+        android:layout_marginBottom="24dp"
         android:fontFamily="@font/hoonwhitecat"
-        android:src="@drawable/ic_baseline_settings_24"
+        android:src="@drawable/sword"
         android:text="설정"
-        android:textSize="30sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.515"
-        app:layout_constraintStart_toEndOf="@+id/textView4"
-        app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
+        android:textSize="30sp"
+        app:layout_constraintBottom_toTopOf="@+id/textView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
         android:id="@+id/btn_backtomain"
         android:layout_width="226dp"
         android:layout_height="62dp"
-        android:layout_marginBottom="44dp"
-        android:text="메인화면으로"
+        android:layout_marginBottom="32dp"
+        android:fontFamily="@font/vlad"
+        android:src="@drawable/back"
+        android:text="Go to Main"
+
+        android:textColor="#000"
         android:textSize="30sp"
-        android:fontFamily="@font/hoonwhitecat"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintHorizontal_bias="0.0"
+
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/textView4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/hoonwhitecat"
-        android:text="게임설명"
+        android:layout_marginBottom="16dp"
+        android:fontFamily="@font/vlad"
+        android:text="How to Game"
+        android:textColor="#000"
         android:textSize="70sp"
-        app:layout_constraintBottom_toTopOf="@+id/textView"
+        app:layout_constraintBottom_toTopOf="@+id/btn_setting"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.418" />
+
+        />
 
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="68dp"
+        android:layout_marginBottom="32dp"
         android:fontFamily="@font/hoonwhitecat"
-        android:text="1. 제한시간내에 보물을 숨겨요"
+        android:text="1. 그림을 눌러 게임을 시작하세요."
+        android:textColor="#000"
+
         android:textSize="30sp"
         app:layout_constraintBottom_toTopOf="@+id/textView2"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.493"
+        app:layout_constraintHorizontal_bias="0.503"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="68dp"
+        android:layout_marginBottom="32dp"
         android:fontFamily="@font/hoonwhitecat"
-        android:text="2. 숨겨진 보물을 모두 찾아봐요"
+        android:text="2. 술래는 제한시간내에 보물을 숨기고 참가\n자들은 숨겨진 보물을 모두 찾아봐요."
+
+        android:textColor="#000"
         android:textSize="30sp"
         app:layout_constraintBottom_toTopOf="@+id/textView3"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="104dp"
+        android:layout_marginBottom="40dp"
         android:fontFamily="@font/hoonwhitecat"
-        android:text="3. 게임이 끝나고 자신의 순위를 확인해요"
+        android:text="3. 게임이 끝나고 자신의 점수를 확인하세요."
+        android:textAlignment="center"
+
+        android:textColor="#000"
+
         android:textSize="30sp"
         app:layout_constraintBottom_toTopOf="@+id/btn_backtomain"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.507"
         app:layout_constraintStart_toStartOf="parent" />
 
 </android.support.constraint.ConstraintLayout>
