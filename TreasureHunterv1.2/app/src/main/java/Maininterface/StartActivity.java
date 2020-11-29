@@ -17,6 +17,7 @@ import android.content.Intent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 //어플의 가장 초기화면 by 이동우
@@ -24,9 +25,9 @@ public class StartActivity extends AppCompatActivity {
 
     MediaPlayer mediaPlayer;
 
-    Button btn_start;
-    Button btn_multi;
-    Button btn_exit;
+    TextView btn_start;
+    TextView btn_multi;
+    TextView btn_exit;
 
 
     AnimationDrawable shipAnimation;
