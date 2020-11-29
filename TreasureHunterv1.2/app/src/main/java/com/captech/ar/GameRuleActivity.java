@@ -86,13 +86,16 @@ public class GameRuleActivity extends AppCompatActivity {
                 String stringHide = etHide.getText().toString();
                 String stringFind = etFind.getText().toString();
 
-                // 사용자에게 정수형으로 받아야할 부분들을 String으로 받았을 때를 방지
+                    // 사용자에게 정수형으로 받아야할 부분들을 String으로 받았을 때를 방지
                 try {
                     //String으로 받은 숨기는 시간, 찾는 시간들을 Integer 값으로 변환
                     setFindingtime = Integer.parseInt(stringFind);
                     setHidingtime = Integer.parseInt(stringHide);
                     isNext = true;
-
+                    if(userNickName.getBytes().length <= 0) {
+                        userNickName = "user";
+                        Toast.makeText(getApplicationContext(), "nickname : user(default)", Toast.LENGTH_SHORT).show();
+                    }
                     //만약에 숫자값이 아니라면 toast message를 띄우고 isNext를 false로 설정하여 다음 액티비티로 넘어가는 것을 방지
                 } catch (NumberFormatException e) {
                     isNext = false;

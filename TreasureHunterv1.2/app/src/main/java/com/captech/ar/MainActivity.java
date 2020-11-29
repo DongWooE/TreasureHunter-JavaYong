@@ -91,16 +91,32 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         public void run() {
             TextViewMain.setText(count + ""); //int형으로 넣으면 오류나고 뒤에 ""붙여서 스트링으로
             count -= 1;
+            boolean except = true;
+
             if (count <= 0) {
                 isFindingTreasure=true;
-                Intent intent= new Intent(MainActivity.this,ConvertToFinding.class);
+                if(setNumberOfTreasure ==0 ){  // 숨기는 사람이 보물을 지정하지 않았을때 by 이동우
+                    except = false;
+                    Toast.makeText(getApplicationContext(), "보물을 지정하지않았습니다", Toast.LENGTH_SHORT).show();
+                    GameRuleActivity.isNext = false;
+                    GameRuleActivity.setFindingtime =0;  //모든 전역변수들을 초기화
+                    GameRuleActivity.setHidingtime =0;
+                    GameRuleActivity.userNickName = null;
+                    MainActivity.score =0;
 
-                // 술래가 Finder에게 넘기는 액티비티 이후에 타이머가 흘러가는 것을 방지하기위해 startActivityForResult를 사용 by 이동우
-                startActivityForResult(intent, REQUEST_CODE);
+                    Hidinghandler.removeCallbacks(runnable);
+                    finish();
 
-                Hidinghandler.removeCallbacks(runnable);
-                TextViewMain.setText(""); //int형으로 넣으면 오류나고 뒤에 ""붙여서 스트링으로
+                }
+                if(except) {
+                    Intent intent = new Intent(MainActivity.this, ConvertToFinding.class);
 
+                    // 술래가 Finder에게 넘기는 액티비티 이후에 타이머가 흘러가는 것을 방지하기위해 startActivityForResult를 사용 by 이동우
+                    startActivityForResult(intent, REQUEST_CODE);
+
+                    Hidinghandler.removeCallbacks(runnable);
+                    TextViewMain.setText(""); //int형으로 넣으면 오류나고 뒤에 ""붙여서 스트링으로
+                }
             } else {
                 Hidinghandler.postDelayed(runnable, 1000);
             }
@@ -263,6 +279,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {  
                 GameRuleActivity.isNext = false;
+                GameRuleActivity.setFindingtime =0;  //모든 전역변수들을 초기화
+                GameRuleActivity.setHidingtime =0;
+                GameRuleActivity.userNickName = null;
+                MainActivity.score =0;
+
                 if(!isFindingTreasure) Hidinghandler.removeCallbacks(runnable);
                 Findinghandler.removeCallbacks(runnable_find); 
                 finish();
