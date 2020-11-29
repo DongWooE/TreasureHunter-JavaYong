@@ -42,7 +42,7 @@ public class StartActivity extends AppCompatActivity {
             }
         });
         
-        //btn_multi(같이 하기) 버튼을 눌렀을떄의 이밴트
+        //btn_multi(같이 하기) 버튼을 눌렀을떄의 이벤트
         btn_multi.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
