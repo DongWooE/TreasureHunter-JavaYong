@@ -15,7 +15,7 @@ import android.widget.Toast;
 
 import Maininterface.StartActivity;
 
-// 사용자에게 간단한 메세지를 보여주고 각종 설정들을 입력받는 class by 차재현 & 이동우
+// 사용자에게 간단한 메세지를 보여주고 각종 설정들을 입력받는 class by 차재현 & 이동우.
 public class GameRuleActivity extends AppCompatActivity {
 
     //현재 액티비티에서 받은 사용자의 정보들을 뒤의 액티비티에서도 사용할 수 있도록 static 으로 선언
