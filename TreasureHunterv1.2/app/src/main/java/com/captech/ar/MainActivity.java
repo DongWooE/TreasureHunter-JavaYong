@@ -83,7 +83,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     //여기는 setHidingtime 변수
     private Integer count = GameRuleActivity.setHidingtime;    //카운트다운 시작숫자
-    private TextView TextViewMain;  //
+    private TextView TextViewMain;
     private Handler Hidinghandler = new Handler();
 
     private Runnable runnable = new Runnable() {
@@ -131,10 +131,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         public void run() {
             FindView.setText(count_find + ""); //int형으로 넣으면 오류나고 뒤에 ""붙여서 스트링으로  만들기
             count_find -= 1; //보물을 찾는 시간 -1
-            if (count_find <= 0) { //보물을 찾는 시간이 0이 되면
-                isFindingTreasure=false; //보물을 찾지 않고 있다
+            if (count_find <= 0 || (setNumberOfTreasure == 0)) { //보물을 찾는 시`간이 0이 되면
+
+
                 Intent intent=new Intent(MainActivity.this,ScoreActivity.class); //intent로 점수출력하는 activity로 이동
                 startActivity(intent); //intent 실행
+
+                isFindingTreasure=false; //보물을 찾지 않고 있다
+
+
                 Findinghandler.removeCallbacks(runnable_find); //보물을 찾는 핸들러 종료
                 FindView.setText(""); //텍스트뷰의 스트링 없음으로 초기화
             } else { //보물을 찾는 시간이 1이상이면
@@ -144,8 +149,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     };
 
     //user정보에 대한 변수 by김동용
-    private int setHidingtime; //보물을 숨기는 시간
-    private int setFindingtime; //보물을 찾는 시간
     private int setNumberOfTreasure = 0; //보물의 개수
     public static int score = 0; //점수
     private boolean isFindingTreasure=false; //보물을 찾고 있는가?
@@ -157,8 +160,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         @Override
         public void run() {
             UserInfo.setText("닉네임 : " + GameRuleActivity.userNickName+"\n"+
-                    "보물을 숨기는 시간 : "+count+"\n"+
-                    "보물을 찾는 시간 : "+count_find+"\n"+
                     "보물의 갯수 : "+setNumberOfTreasure+"\n"+
                     GameRuleActivity.userNickName+"의 점수 : "+score+"\n"+
                     ISFINDINGTREASURE+"\n"); //유저정보 출력
@@ -254,9 +255,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onBackPressed() {
 
         AlertDialog.Builder alBuilder = new AlertDialog.Builder(this);
-        alBuilder.setMessage("Want to Close App?");
+        alBuilder.setMessage("메인화면으로 돌아가시겠습니까?");
 
-        alBuilder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+        alBuilder.setPositiveButton("예", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 finish();

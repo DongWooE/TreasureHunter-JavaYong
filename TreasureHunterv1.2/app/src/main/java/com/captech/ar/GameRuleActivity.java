@@ -21,7 +21,7 @@ public class GameRuleActivity extends AppCompatActivity {
     public static Integer setFindingtime;
     public static Integer setHidingtime;
 
-    Button btn_move;
+    //Button btn_move;
     ImageView btn_setting;
     Button btn_backtomain;
 
@@ -31,19 +31,10 @@ public class GameRuleActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game_rule);
 
-        btn_move = findViewById(R.id.btn_move);
+
         btn_setting = findViewById(R.id.btn_setting);
         btn_backtomain = findViewById(R.id.btn_backtomain);
 
-
-        btn_move.setOnClickListener(new View.OnClickListener() {
-           @Override
-           public void onClick(View v) {
-               Intent intent = new Intent(GameRuleActivity.this,MainActivity.class);
-                startActivity(intent);      //게임 룰에서 게임화면으로 이동
-               finish();
-           }
-       });
 
         // 설정 버튼을 눌렀을때 사용자에게 EditText를 사용해서 각종 정보들을 받는 부분 by 이동우
         btn_setting.setOnClickListener(new View.OnClickListener() {

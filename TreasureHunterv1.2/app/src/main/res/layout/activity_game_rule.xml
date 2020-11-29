@@ -7,27 +7,15 @@
     tools:context=".GameRuleActivity">
 
 
-    <Button
-        android:id="@+id/btn_move"
-        android:layout_width="125dp"
-        android:layout_height="60dp"
-        android:layout_marginBottom="30dp"
-        android:fontFamily="@font/hoonwhitecat"
-        android:text="시작하기"
-        android:textSize="30sp"
-        app:layout_constraintBottom_toTopOf="@+id/btn_backtomain"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
     <ImageView
         android:id="@+id/btn_setting"
         android:layout_width="80dp"
         android:layout_height="63dp"
-        android:layout_marginTop="126dp"
-        android:text="설정"
-        android:textSize="30sp"
+        android:layout_marginTop="92dp"
         android:fontFamily="@font/hoonwhitecat"
         android:src="@drawable/ic_baseline_settings_24"
+        android:text="설정"
+        android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.515"
         app:layout_constraintStart_toEndOf="@+id/textView4"
@@ -57,7 +45,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.552" />
+        app:layout_constraintVertical_bias="0.418" />
 
     <TextView
         android:id="@+id/textView"
@@ -89,11 +77,11 @@
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="70dp"
+        android:layout_marginBottom="104dp"
         android:fontFamily="@font/hoonwhitecat"
         android:text="3. 게임이 끝나고 자신의 순위를 확인해요"
         android:textSize="30sp"
-        app:layout_constraintBottom_toTopOf="@+id/btn_move"
+        app:layout_constraintBottom_toTopOf="@+id/btn_backtomain"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 

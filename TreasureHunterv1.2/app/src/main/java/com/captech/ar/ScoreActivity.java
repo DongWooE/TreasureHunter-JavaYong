@@ -30,7 +30,13 @@ public class ScoreActivity extends AppCompatActivity {
                 Intent intent = new Intent(ScoreActivity.this, StartActivity.class);
                 startActivity(intent);      //게임 룰에서 게임화면으로 이동
                 finish();
+
+                GameRuleActivity.setFindingtime =0;  //모든 전역변수들을 초기화
+                GameRuleActivity.setHidingtime =0;
+                GameRuleActivity.userNickName = null;
+                MainActivity.score =0;
             }
         });
     }
+
 }
