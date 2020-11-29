@@ -307,6 +307,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 postImageView.setBackground(null);
                 break;
 
+
             }
         }
     }
