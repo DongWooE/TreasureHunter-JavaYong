@@ -142,6 +142,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                 Findinghandler.removeCallbacks(runnable_find); //보물을 찾는 핸들러 종료
                 FindView.setText(""); //텍스트뷰의 스트링 없음으로 초기화
+                finish();
             } else { //보물을 찾는 시간이 1이상이면
                 Findinghandler.postDelayed(runnable_find, 1000); //1초씩 지연하여 runnable작동(타이머 기능)
             }
@@ -260,6 +261,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         alBuilder.setPositiveButton("예", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
+                GameRuleActivity.isNext = false;
                 finish();
             }
         });

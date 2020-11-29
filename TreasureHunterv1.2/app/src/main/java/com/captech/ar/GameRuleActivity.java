@@ -1,6 +1,8 @@
 package com.captech.ar;
 
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -25,6 +27,7 @@ public class GameRuleActivity extends AppCompatActivity {
     ImageView btn_setting;
     Button btn_backtomain;
 
+    public static boolean isNext = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +44,7 @@ public class GameRuleActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 show();
+                if(isNext) finish();
             }
         });
 
@@ -83,7 +87,6 @@ public class GameRuleActivity extends AppCompatActivity {
                 String stringFind = etFind.getText().toString();
 
                 // 사용자에게 정수형으로 받아야할 부분들을 String으로 받았을 때를 방지
-                boolean isNext = false;
                 try {
                     //String으로 받은 숨기는 시간, 찾는 시간들을 Integer 값으로 변환
                     setFindingtime = Integer.parseInt(stringFind);
@@ -100,6 +103,7 @@ public class GameRuleActivity extends AppCompatActivity {
                     Intent intent = new Intent(GameRuleActivity.this, MainActivity.class);
                     startActivity(intent);
                     dialog.dismiss();
+
                 }
 
             }
@@ -107,6 +111,29 @@ public class GameRuleActivity extends AppCompatActivity {
 
         dialog.show();
     }
+
+
+    @Override
+    public void onBackPressed() {        AlertDialog.Builder alBuilder = new AlertDialog.Builder(this);
+        alBuilder.setMessage("게임을 종료하시겠습니까?");
+
+        alBuilder.setPositiveButton("예", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                GameRuleActivity.isNext = false;
+                ActivityCompat.finishAffinity(GameRuleActivity.this);
+                System.exit(0); //어플리케이션 종료
+            }
+        });
+
+        alBuilder.setNegativeButton("아니오", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                return;
+            }
+        });
+        alBuilder.setTitle("게임 종료");
+        alBuilder.show();}
 
 }
 

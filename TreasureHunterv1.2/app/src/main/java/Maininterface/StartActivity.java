@@ -83,4 +83,11 @@ public class StartActivity extends AppCompatActivity {
 
     }
 
+
+    @Override
+    public void onBackPressed() {
+        ActivityCompat.finishAffinity(StartActivity.this);
+        System.exit(0); //어플리케이션 종료
+    }
+
 }
