@@ -4,9 +4,11 @@ import android.content.Intent;
 import android.media.AudioAttributes;
 import android.media.AudioManager;
 import android.media.Image;
+import android.media.MediaPlayer;
 import android.media.SoundPool;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
@@ -15,18 +17,36 @@ import android.widget.TextView;
 
 import Maininterface.StartActivity;
 
+
+
 public class ScoreActivity extends AppCompatActivity {
-    SoundPool soundPool;
-    int buttonsound;
+
+    public static MediaPlayer rmediaPlayer;
+    SoundPool csoundPool;
+    int cbuttonsound;
+
 
     TextView Scoreview;
     ImageView btn_gotomain;
+
+    //액티비티가 종료될때 이 메소드를 실행함 (배경음 해제)
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if(rmediaPlayer != null){
+            rmediaPlayer.release();
+            rmediaPlayer=null;
+
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_score);
 
+        rmediaPlayer = MediaPlayer.create(ScoreActivity.this,R.raw.scoresound);
+        rmediaPlayer.start();
 
         btn_gotomain = findViewById(R.id.btn_gotomain);
 
@@ -36,18 +56,25 @@ public class ScoreActivity extends AppCompatActivity {
         btn_gotomain.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //버튼을 누를때마다 효과음 발생
-                soundPool.play(buttonsound,1,1,1,0,1);
+
+                csoundPool.play(cbuttonsound,1,1,0,0,0);
 
                 Intent intent = new Intent(ScoreActivity.this, StartActivity.class);
                 startActivity(intent);      //게임 룰에서 게임화면으로 이동
-                finish();
+
 
                 GameRuleActivity.setFindingtime =0;  //모든 전역변수들을 초기화
                 GameRuleActivity.setHidingtime =0;
                 GameRuleActivity.userNickName = null;
                 MainActivity.score =0;
                 GameRuleActivity.isNext = false;
+
+                if(rmediaPlayer.isPlaying()){
+                    rmediaPlayer.stop();
+                    rmediaPlayer.reset();
+                }
+
+                finish();
             }
         });
 
@@ -66,16 +93,17 @@ public class ScoreActivity extends AppCompatActivity {
                     .setContentType(AudioAttributes.CONTENT_TYPE_MUSIC)
                     .build();
 
-            soundPool = new SoundPool.Builder()
+            csoundPool = new SoundPool.Builder()
                     .setAudioAttributes(audioAttributes)
-                    .setMaxStreams(6)
+                    .setMaxStreams(1)
                     .build();
         }
         else {
-            soundPool = new SoundPool(6, AudioManager.STREAM_MUSIC,0);
+            csoundPool = new SoundPool(1, AudioManager.STREAM_MUSIC,0);
         }
 
-        buttonsound = soundPool.load(getApplicationContext(),R.raw.button,1);
+        cbuttonsound = csoundPool.load(getApplicationContext(),R.raw.button,0);
+
 
     }
 
@@ -83,7 +111,7 @@ public class ScoreActivity extends AppCompatActivity {
     @Override
     protected void onStop() {
         super.onStop();
-        soundPool.release();
+        csoundPool.release();
     }
 
 }

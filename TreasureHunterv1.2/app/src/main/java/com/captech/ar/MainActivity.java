@@ -19,6 +19,7 @@ package com.captech.ar;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -70,7 +71,7 @@ import com.google.ar.sceneform.ux.TransformableNode;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {   //MainActivity class
 
-
+    public static MediaPlayer mmediaPlayer;
     private ArFragment mFragment;
     private GestureDetector mGestureDetector;
     private ImageView postImageView;
@@ -80,15 +81,29 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private int selectedId = -1;
     static final int REQUEST_CODE = 100;
 
-    //여기는 setHidingtime 변수
+
+
+    //액티비티가 종료될때 이 메소드를 실행함 (배경음 해제)
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if(mmediaPlayer != null){
+            mmediaPlayer.release();
+            mmediaPlayer=null;
+
+        }
+    }
+
+    //여기는 보물을 찾는 메소드 by 이동우, 차재현
+    //setHidingtime 변수 선언
     private Integer count = GameRuleActivity.setHidingtime;    //카운트다운 시작숫자
     private TextView TextViewMain;
-    private Handler Hidinghandler = new Handler();
+    private Handler Hidinghandler = new Handler();  // 보물을 숨기는 handler 선언
 
-    private Runnable runnable = new Runnable() {
+    private Runnable runnable = new Runnable() {  // runnable를 통해 보물을 숨기는 타이머 및 현재상태 출력 by 이동우, 차재현
         @Override
         public void run() {
-            TextViewMain.setText(count + ""); //int형으로 넣으면 오류나고 뒤에 ""붙여서 스트링으로
+            TextViewMain.setText(count + "");
             count -= 1;
             boolean except = true;
 
@@ -103,7 +118,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     GameRuleActivity.userNickName = null;
                     MainActivity.score =0;
 
-                    Hidinghandler.removeCallbacks(runnable);
+
+
+                    Hidinghandler.removeCallbacks(runnable);    // 보물을 숨기는 handler 종료
                     finish();
 
                 }
@@ -144,13 +161,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private Runnable runnable_find = new Runnable() { //보물을 찾는 runnable 선언
         @Override
         public void run() {
+
             FindView.setText(count_find + ""); //int형으로 넣으면 오류나고 뒤에 ""붙여서 스트링으로  만들기
             count_find -= 1; //보물을 찾는 시간 -1
-            if (count_find <= 0 || (setNumberOfTreasure == 0)) { //보물을 찾는 시`간이 0이 되면
+            if (count_find <= 0 || (setNumberOfTreasure == 0)) { //보물을 찾는 시간이 0이 되면
 
 
                 Intent intent=new Intent(MainActivity.this,ScoreActivity.class); //intent로 점수출력하는 activity로 이동
                 startActivity(intent); //intent 실행
+
+                if(mmediaPlayer.isPlaying()){
+                    mmediaPlayer.stop();
+                    mmediaPlayer.reset();
+                }
 
                 isFindingTreasure=false; //보물을 찾지 않고 있다
 
@@ -193,6 +216,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override   //Application속 실행주기의 맨 처음에 있는 method. by 김동용,박성진,차재현,이동우
     protected void onCreate(Bundle savedInstanceState) {
+
+        mmediaPlayer = MediaPlayer.create(MainActivity.this,R.raw.mopz_robowack);
+        mmediaPlayer.start();
+
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
@@ -208,11 +236,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         //on tapping of the scene, we want to interact with the world
         mFragment.getArSceneView().getScene().setOnTouchListener((hitTestResult, motionEvent) -> mGestureDetector.onTouchEvent(motionEvent));
 
-        //여기서부터 타이머 by 차재현
+        //보물을 숨기는 타이머 by 차재현
         TextViewMain = findViewById(R.id.TextViewMain);
         TextViewMain.setText("");   //1초 간격으로 출력, setText 초기값으로 초기화
         Hidinghandler.post(runnable);
-        //여기까지 타이머
+
 
         //보물을 찾는 시간으로 게임을 제어하는 코드 by 김동용
         FindView = findViewById(R.id.FindView); //보물을 찾는 시간에 대한 텍스트뷰 연결
@@ -247,6 +275,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         //click listener for selecting that you want to post a note.
         postImageView.setOnClickListener(this);
+
 
     }
 
