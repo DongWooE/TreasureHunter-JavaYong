@@ -13,14 +13,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
+//이거시 구데기
 package com.captech.ar;
 
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.drawable.AnimationDrawable;
+import android.media.AudioAttributes;
+import android.media.AudioManager;
 import android.media.MediaPlayer;
+import android.media.SoundPool;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.constraint.ConstraintLayout;
@@ -81,6 +86,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private int selectedId = -1;
     static final int REQUEST_CODE = 100;
 
+    public static SoundPool mainsoundPool;
+    int findsound;
+    int hidesound;
+
 
 
     //액티비티가 종료될때 이 메소드를 실행함 (배경음 해제)
@@ -140,7 +149,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     };
 
     // 술래가 Finder에게 넘기는 액티비티 이후에 타이머가 흘러가는 것을 방지하기위한 함수 by 이동우
-   @Override
+    @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == REQUEST_CODE)
@@ -307,7 +316,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         alBuilder.setPositiveButton("예", new DialogInterface.OnClickListener() {
             // 도중에 게임을 종료시에 모든 타이머와 boolean값을 변경해주는 함수 by 이동우
             @Override
-            public void onClick(DialogInterface dialogInterface, int i) {  
+            public void onClick(DialogInterface dialogInterface, int i) {
                 GameRuleActivity.isNext = false;
                 GameRuleActivity.setFindingtime =0;  //모든 전역변수들을 초기화
                 GameRuleActivity.setHidingtime =0;
@@ -315,7 +324,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 MainActivity.score =0;
 
                 if(!isFindingTreasure) Hidinghandler.removeCallbacks(runnable);
-                Findinghandler.removeCallbacks(runnable_find); 
+                Findinghandler.removeCallbacks(runnable_find);
                 finish();
             }
         });
@@ -354,6 +363,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 buildRenderable(mFragment, hit.createAnchor());
                 setNumberOfTreasure++;
                 //remove selected item after a successful set.
+
+                mainsoundPool.play(hidesound,1,1,1,0,1);   // 보물을 숨길 때마다 효과음 출력 by 차재현
+
                 selectedId = -1;    //보물을 설치하고 나서 앱 하단에 비활성화로 전환.
                 postImageView.setBackground(null);
                 break;
@@ -395,6 +407,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
      * @param renderable
      */
     private void addNodeToScene(ArFragment fragment, Anchor anchor, Renderable renderable) {    //보물 Anchor의 사이즈를 조절하고 보물 Anchor를 사용자가 터치하면 사자리며 점수를 획득 by 박성진.
+
         AnchorNode anchorNode = new AnchorNode(anchor);
         TransformableNode postitNode = new TransformableNode(fragment.getTransformationSystem());
         postitNode.setRenderable(renderable);
@@ -419,6 +432,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             postitNode.select();
             if(isFindingTreasure)   //보물을 찾는 모드일 때 보물을 터치하게되면 보물이 사라지고 100점을 얻는다.
             {
+                mainsoundPool.play(findsound,1,1,1,0,1);   // 보물을 찾을 때마다 효과음 출력 by 차재현
                 setNumberOfTreasure--;
                 score += 100;
                 Node nodeToRemove = hitTestResult.getNode();
@@ -454,4 +468,35 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         postitNode.select();
     }
 
+    @Override
+    public void onStart()   // 보물을 숨기고 찾을때 출력되는 효과음 할당 By 차재현.
+    {
+        super.onStart();
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
+            AudioAttributes audioAttributes = new AudioAttributes.Builder()
+                    .setUsage(AudioAttributes.USAGE_GAME)
+                    .setContentType(AudioAttributes.CONTENT_TYPE_MUSIC)
+                    .build();
+
+            mainsoundPool = new SoundPool.Builder()
+                    .setAudioAttributes(audioAttributes)
+                    .setMaxStreams(1)
+                    .build();
+        }
+        else {
+            mainsoundPool = new SoundPool(1, AudioManager.STREAM_MUSIC,0);
+        }
+
+
+        findsound = mainsoundPool.load(getApplicationContext(),R.raw.touch_sound,0);
+        hidesound = mainsoundPool.load(getApplicationContext(),R.raw.hidingsound,0);
+
+    }
+
+    //버튼 사운드 해제 by 차재현
+    @Override
+    protected void onStop() {
+        super.onStop();
+        mainsoundPool.release();
+    }
 }
