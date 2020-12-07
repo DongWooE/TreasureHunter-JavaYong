@@ -213,7 +213,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             //score+"\n"+ ISFINDINGTREASURE+"\n"+GameRuleActivity.userNickName+"의 점수 : "+
             UserInfo.setText("X"+setNumberOfTreasure); //유저정보 출력
             UserName.setText("Nickname: "+GameRuleActivity.userNickName); //유저정보 출력
-            Score.setText(GameRuleActivity.userNickName+"의 점수\n"+ISFINDINGTREASURE+"\n"); //유저정보 출력
+            Score.setText(GameRuleActivity.userNickName+"의 점수 : "+score+"\n"+ISFINDINGTREASURE+"\n"); //유저정보 출력
             if(isFindingTreasure) //보물을 찾고 있으면
                 ISFINDINGTREASURE="보물을 찾는 중"; //문자열 변경
             else //아니면
