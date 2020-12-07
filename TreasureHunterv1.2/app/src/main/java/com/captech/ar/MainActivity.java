@@ -348,7 +348,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
      * @param motionEvent
      */
     private void tapAddObject(MotionEvent motionEvent) {    //술래가 원하는 위치에 터치를 해서 보물을 놓을 수 있도록 함 by 박성진.
-        Frame frame = mFragment.getArSceneView().getArFrame();
+        Frame frame = mFragment.getArSceneView().getArFrame(); //프레임을 따서 저장
 
         if (selectedId == -1 || motionEvent == null || frame == null || //앱 하단에 보물이 활성화(터치)되어 있지 않거나 모션 이벤트가 발생하지 않았을 경우 그냥 아무 작업없이 리턴 by 박성진.
                 frame.getCamera().getTrackingState() != TrackingState.TRACKING)
@@ -367,7 +367,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 mainsoundPool.play(hidesound,1,1,1,0,1);   // 보물을 숨길 때마다 효과음 출력 by 차재현
 
                 selectedId = -1;    //보물을 설치하고 나서 앱 하단에 비활성화로 전환.
-                postImageView.setBackground(null);
+                postImageView.setBackground(null); //보물이 선택되지 않았음으로 전환
                 break;
 
 
